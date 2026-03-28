@@ -1,41 +1,37 @@
 class Frostscribe < Formula
   desc "Native macOS disc ripping and encoding tool for Jellyfin, Plex, and Kodi"
   homepage "https://github.com/trevholliday/frostscribe"
-  version "1.0.0"
-
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/trevholliday/frostscribe/releases/download/v#{version}/frostscribe-arm64.tar.gz"
-      # sha256 "<arm64-sha256>"
-    else
-      url "https://github.com/trevholliday/frostscribe/releases/download/v#{version}/frostscribe-x86_64.tar.gz"
-      # sha256 "<x86_64-sha256>"
-    end
-  end
+  url "https://github.com/trevholliday/frostscribe/archive/refs/tags/v0.1.0.tar.gz"
+  sha256 "2388429ff57bf44d16c81d353164a5bbe1cf5814d3567ad96f921bbcb2a6c47f"
+  version "0.1.0"
+  license "MIT"
 
   depends_on :macos => :sonoma
   depends_on "handbrake" => :recommended
 
   def install
-    bin.install "frostscribe"
-    bin.install "frostscribe-worker"
+    system "swift", "build", "-c", "release",
+           "--product", "frostscribe",
+           "--product", "frostscribe-worker"
+    bin.install ".build/release/frostscribe"
+    bin.install ".build/release/frostscribe-worker"
   end
 
   def caveats
     <<~EOS
       MakeMKV is required for disc ripping. Download and install it from:
         https://www.makemkv.com
-      Then open /Applications/MakeMKV.app once to activate your licence key.
 
       Run the setup wizard to configure Frostscribe:
         frostscribe init
 
-      To start the encode worker (runs as a launchd agent):
+      To install and start the encode worker (runs as a launchd agent):
+        frostscribe worker install
         frostscribe worker start
     EOS
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/frostscribe --version")
+    assert_match "0.1.0", shell_output("#{bin}/frostscribe --version")
   end
 end
