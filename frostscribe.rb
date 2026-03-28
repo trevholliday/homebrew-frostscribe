@@ -7,6 +7,7 @@ class Frostscribe < Formula
   license "MIT"
 
   depends_on :macos => :sonoma
+  depends_on xcode: "16"
   depends_on "handbrake" => :recommended
 
   def install
