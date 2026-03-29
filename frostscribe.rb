@@ -1,16 +1,16 @@
 class Frostscribe < Formula
   desc "Native macOS disc ripping and encoding tool for Jellyfin, Plex, and Kodi"
   homepage "https://github.com/trevholliday/frostscribe"
-  version "0.1.0"
+  version "0.1.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/trevholliday/frostscribe/releases/download/v0.1.0/frostscribe-arm64.tar.gz"
-      sha256 "4825f196f7a038781d830d354fdd6e3968d082c75cc1cdff62370287c784dbb7"
+      url "https://github.com/trevholliday/frostscribe/releases/download/v0.1.1/frostscribe-arm64.tar.gz"
+      sha256 "e602ed7b8ab76ea03b13b3dac5180020b8e0bd4aa4a3d93d664181a4767f98bd"
     else
-      url "https://github.com/trevholliday/frostscribe/releases/download/v0.1.0/frostscribe-x86_64.tar.gz"
-      sha256 "ba78c29ef119d5613d90455386b3827e6e7a0eba268370d1b8a820efcada13d4"
+      url "https://github.com/trevholliday/frostscribe/releases/download/v0.1.1/frostscribe-x86_64.tar.gz"
+      sha256 "87555d9b0068b0ff7c2f8cfe7f28fd296d9ae70d7cea525abc0330589a8712ab"
     end
   end
 
